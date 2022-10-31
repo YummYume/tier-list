@@ -1,0 +1,7 @@
+{% macro displayTierListItem(tierListItemForm) %}
+    <div>
+        {{ form_row(tierListItemForm.name) }}
+        {{ form_row(tierListItemForm.description) }}
+        {{ form_row(tierListItemForm.position) }}
+    </div>
+{% endmacro %}

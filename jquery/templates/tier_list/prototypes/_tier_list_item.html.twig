@@ -1,0 +1,8 @@
+{% macro displayTierListItem(tierListItemForm) %}
+    <div data-entry>
+        {{ form_row(tierListItemForm.name) }}
+        {{ form_row(tierListItemForm.description) }}
+        {{ form_row(tierListItemForm.position) }}
+        <button type="button" data-type-button="remove">Remove</button>
+    </div>
+{% endmacro %}

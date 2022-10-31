@@ -1,0 +1,17 @@
+{% import 'tier_list/prototypes/_tier_list_rank.html.twig' as tierListRankMacro %}
+
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.description) }}
+    {{ form_label(form.tierListRanks) }}
+    <div
+        id="tier_list_ranks"
+        data-prototype="{{ tierListRankMacro.displayTierListRank(form.tierListRanks.vars.prototype)|e }}"
+    >
+        {% for tierListRank in form.tierListRanks %}
+            {{ tierListRankMacro.displayTierListRank(tierListRank) }}
+        {% endfor %}
+    </div>
+    {{ form_row(form._token) }}
+    <button>{{ button_label|default('Save') }}</button>
+{{ form_end(form, {'render_rest': false}) }}
