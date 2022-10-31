@@ -5,5 +5,5 @@ Tier list apps, made to demonstrate alternatives to jQuery.
 
 - Symfony form + vanilla JS
 - Symfony form + jQuery
-- Symfony form + Symfony UX
+- Symfony form + Stimulus (Symfony UX)
 - Symfony API + Svelte

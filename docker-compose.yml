@@ -1,0 +1,57 @@
+version: '3.3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./vanilla/public:/home/app/vanilla/public:rw,cached"
+      - "./jquery/public:/home/app/jquery/public:rw,cached"
+      - "./stimulus/public:/home/app/stimulus/public:rw,cached"
+      - "./index:/home/app/index:rw,cached"
+      - "./nginx/logs:/logs"
+    depends_on:
+      - php
+      - db
+    container_name: nmj-nginx
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    restart: unless-stopped
+    stdin_open: true
+    volumes:
+      - "./vanilla:/vanilla:rw,cached"
+      - "./jquery:/jquery:rw,cached"
+      - "./stimulus:/stimulus:rw,cached"
+      - "/vanilla/node_modules"
+      - "/jquery/node_modules"
+      - "/stimulus/node_modules"
+    container_name: nmj-php
+
+  db:
+    image: mariadb:10.8.2
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: "root"
+      MARIADB_DATABASE: "app"
+      MARIADB_USER: "app"
+      MARIADB_PASSWORD: "xxx"
+    container_name: nmj-db
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    container_name: nmj-phpmyadmin
