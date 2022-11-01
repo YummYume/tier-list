@@ -33,6 +33,14 @@ Encore
     })
     .enableSassLoader()
     .enableReactPreset()
+    .enablePostCssLoader()
 ;
 
-module.exports = Encore.getWebpackConfig();
+module.exports = {
+    ...Encore.getWebpackConfig(),
+    watch: true,
+    watchOptions: {
+        aggregateTimeout: 200,
+        poll: 1000
+    }
+};

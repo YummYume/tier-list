@@ -30,6 +30,13 @@ Encore
         config.corejs = '3.23';
     })
     .enableSassLoader()
-;
+    .enablePostCssLoader();
 
-module.exports = Encore.getWebpackConfig();
+module.exports = {
+    ...Encore.getWebpackConfig(),
+    watch: true,
+    watchOptions: {
+    aggregateTimeout: 200,
+    poll: 1000
+    }
+};
