@@ -52,7 +52,7 @@ lint-vanilla:
 	$(EXECVANILLA) yarn lint
 
 lint-jquery:
-	$(EXEJQUERY) yarn lint
+	$(EXECJQUERY) yarn lint
 
 lint-stimulus:
 	$(EXECSTIMULUS) yarn lint

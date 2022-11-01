@@ -3,6 +3,7 @@
 {% block title %}TierList{% endblock %}
 
 {% block body %}
+    <div {{ react_component('Party', { confettis: 1000 }) }}></div>
     <h1>TierList</h1>
     <table>
         <tbody>
@@ -17,6 +18,38 @@
             <tr>
                 <th>CreatedAt</th>
                 <td>{{ tier_list.createdAt ? tier_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Ranks</th>
+                <td>
+                    {% for tierListRank in tier_list.tierListRanks|sort((a, b) => a.position >= b.position) %}
+                        <li>
+                            <span>{{ tierListRank.name }}</span>
+                            <div>
+                                My items are
+                                {% if tierListRank.tierListItems|length > 1 %}
+                                    {% set sortedStrings = [] %}
+                                    {% for item in tierListRank.tierListItems|sort((a, b) => a.position >= b.position) %}
+                                        {% set sortedStrings = sortedStrings|merge([item.name]) %}
+                                    {% endfor %}
+                                    <span {{ stimulus_controller('symfony/ux-typed', {
+                                        strings: sortedStrings,
+                                        smartBackspace: true,
+                                        typeSpeed: 75,
+                                        startDelay: 100,
+                                        backSpeed: 20,
+                                        backDelay: 500,
+                                        loop: true,
+                                        showCursor: true,
+                                        cursorChar: ''
+                                    }) }}></span>
+                                {% else %}
+                                    {{ tierListRank.tierListItems|length > 0 ? (tierListRank.tierListItems|first).name : 'none...' }}
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </td>
             </tr>
         </tbody>
     </table>
