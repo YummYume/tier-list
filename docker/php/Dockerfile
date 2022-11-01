@@ -35,6 +35,12 @@ COPY ./stimulus .
 RUN apk update && apk add -u yarn
 RUN yarn install
 
+# API SPA
+WORKDIR /api/spa
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY ./api/spa .
+
 WORKDIR /
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
