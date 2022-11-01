@@ -2,7 +2,7 @@
 	"name": "spa",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0' vite dev --host",
+		"dev": "NODE_TLS_REJECT_UNAUTHORIZED='0' vite dev --host",
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "eslint ."
