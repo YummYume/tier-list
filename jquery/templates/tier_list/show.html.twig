@@ -15,12 +15,12 @@
                 <td>{{ tier_list.description }}</td>
             </tr>
             <tr>
-                <th>CreatedAt</th>
+                <th>Created at</th>
                 <td>{{ tier_list.createdAt ? tier_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
-    <a href="{{ path('app_tier_list_index') }}">back to list</a>
-    <a href="{{ path('app_tier_list_edit', {'id': tier_list.id}) }}">edit</a>
+    <a href="{{ path('app_tier_list_index') }}">Back to list</a>
+    <a href="{{ path('app_tier_list_edit', {'id': tier_list.id}) }}">Edit</a>
     {{ include('tier_list/_delete_form.html.twig') }}
 {% endblock %}

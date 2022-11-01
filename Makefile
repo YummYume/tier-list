@@ -5,6 +5,8 @@ EXECPHP=$(COMPOSE) exec php
 EXECVANILLA=$(COMPOSE) exec -w /vanilla php
 EXECJQUERY=$(COMPOSE) exec -w /jquery php
 EXECSTIMULUS=$(COMPOSE) exec -w /stimulus php
+EXECAPISPA=$(COMPOSE) exec -w /api/spa php
+EXECSPA=$(COMPOSE) exec spa
 
 start:
 	$(COMPOSE) build --force-rm
@@ -44,6 +46,12 @@ ssh-jquery:
 ssh-stimulus:
 	$(EXECSTIMULUS) sh
 
+ssh-api-spa:
+	$(EXECAPISPA) sh
+
+ssh-spa:
+	$(EXECSPA) sh
+
 ssh-nginx:
 	$(EXECNGINX) bash
 
@@ -57,8 +65,11 @@ lint-jquery:
 lint-stimulus:
 	$(EXECSTIMULUS) yarn lint
 
+lint-spa:
+	$(EXECSPA) yarn lint
+
 # PERM
-perm: perm-vanilla perm-jquery perm-stimulus
+perm: perm-vanilla perm-jquery perm-stimulus perm-api-spa
 
 perm-vanilla:
 ifeq ($(ENVIRONMENT),Linux)
@@ -87,8 +98,17 @@ else
 	$(EXECPHP) chown -R www-data:root /stimulus/public/
 endif
 
+perm-api-spa:
+ifeq ($(ENVIRONMENT),Linux)
+	sudo chown -R www-data:$(USER) ./api/spa
+	sudo chmod -R g+rwx ./api/spa
+else
+	$(EXECPHP) chown -R www-data:root /api/spa
+	$(EXECPHP) chown -R www-data:root /api/spa/public/
+endif
+
 # CACHE CLEAR
-cc: cc-vanilla cc-jquery cc-stimulus
+cc: cc-vanilla cc-jquery cc-stimulus cc-api-spa
 
 cc-vanilla:
 	$(EXECVANILLA) bin/console c:cl --no-warmup
@@ -102,23 +122,31 @@ cc-stimulus:
 	$(EXECSTIMULUS) bin/console c:cl --no-warmup
 	$(EXECSTIMULUS) bin/console c:warmup
 
+cc-api-spa:
+	$(EXECAPISPA) bin/console c:cl --no-warmup
+	$(EXECAPISPA) bin/console c:warmup
+
 # VENDOR
-vendor: vendor-vanilla vendor-jquery vendor-stimulus
+vendor: vendor-vanilla vendor-jquery vendor-stimulus vendor-api-spa
 
 vendor-vanilla: wait-for-db
 	$(EXECVANILLA) composer install -n
 	$(EXECVANILLA) yarn install --pure-lockfile
-	make perm
+	make perm-vanilla
 
 vendor-jquery: wait-for-db
 	$(EXECJQUERY) composer install -n
 	$(EXECJQUERY) yarn install --pure-lockfile
-	make perm
+	make perm-jquery
 
 vendor-stimulus: wait-for-db
 	$(EXECSTIMULUS) composer install -n
 	$(EXECSTIMULUS) yarn install --pure-lockfile
-	make perm
+	make perm-stimulus
+
+vendor-api-spa: wait-for-db
+	$(EXECAPISPA) composer install -n
+	make perm-api-spa
 
 # ASSETS
 assets: assets-vanilla assets-jquery assets-stimulus
@@ -140,7 +168,7 @@ wait-for-db:
 	$(EXECPHP) php -r "set_time_limit(60);for(;;){if(@fsockopen(\"db\",3306)){break;}echo \"Waiting for DB\n\";sleep(1);}"
 
 # SYNC
-sync: sync-vanilla sync-jquery sync-stimulus
+sync: sync-vanilla sync-jquery sync-stimulus sync-spa
 
 sync-vanilla:
 	@echo Syncing vanilla node_modules dependencies...
@@ -174,3 +202,14 @@ endif
 	mkdir stimulus/node_modules
 	docker cp nmj-php:/stimulus/node_modules ./stimulus/
 	@echo Dependencies for stimulus synced!
+
+sync-spa:
+	@echo Syncing spa node_modules dependencies...
+ifeq ($(OS)$(SHELL),Windows_NTsh.exe)
+	if exist spa/node_modules rmdir spa/node_modules /S /Q
+else
+	rm -rf spa/node_modules
+endif
+	mkdir spa/node_modules
+	docker cp nmj-spa:/usr/src/spa/node_modules ./spa/
+	@echo Dependencies for spa synced!

@@ -13,6 +13,7 @@ services:
       - "./vanilla/public:/home/app/vanilla/public:rw,cached"
       - "./jquery/public:/home/app/jquery/public:rw,cached"
       - "./stimulus/public:/home/app/stimulus/public:rw,cached"
+      - "./api/spa/public:/home/app/api/spa/public:rw,cached"
       - "./index:/home/app/index:rw,cached"
       - "./nginx/logs:/logs"
     depends_on:
@@ -30,10 +31,25 @@ services:
       - "./vanilla:/vanilla:rw,cached"
       - "./jquery:/jquery:rw,cached"
       - "./stimulus:/stimulus:rw,cached"
+      - "./api/spa:/api/spa:rw,cached"
       - "/vanilla/node_modules"
       - "/jquery/node_modules"
       - "/stimulus/node_modules"
     container_name: nmj-php
+
+  spa:
+    build:
+      context: .
+      dockerfile: docker/spa/Dockerfile
+    volumes:
+      - "./spa:/usr/src/spa:rw,cached"
+      - "/usr/src/spa/node_modules"
+    stdin_open: true
+    tty: true
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    container_name: nmj-spa
 
   db:
     image: mariadb:10.8.2

@@ -9,8 +9,8 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>CreatedAt</th>
-                <th>actions</th>
+                <th>Created at</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +20,8 @@
                 <td>{{ tier_list.description }}</td>
                 <td>{{ tier_list.createdAt ? tier_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_tier_list_show', {'id': tier_list.id}) }}">show</a>
-                    <a href="{{ path('app_tier_list_edit', {'id': tier_list.id}) }}">edit</a>
+                    <a href="{{ path('app_tier_list_show', {'id': tier_list.id}) }}">Show</a>
+                    <a href="{{ path('app_tier_list_edit', {'id': tier_list.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
