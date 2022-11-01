@@ -1,0 +1,30 @@
+table {
+  background-color: $neutral-200;
+  border-radius: rem(5);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  width: 100%;
+
+  thead,
+  tbody {
+    border: rem(2) solid $neutral-200;
+  }
+
+  tr {
+    display: flex;
+    gap: rem(2);
+  }
+
+  td,
+  th {
+    flex: 1;
+    padding: rem(6) 2ch;
+  }
+
+  td {
+    background-color: $neutral-900;
+  }
+
+  th {
+    background-color: $neutral-800;
+  }
+}

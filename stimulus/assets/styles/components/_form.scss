@@ -1,0 +1,97 @@
+form {
+  background-color: $neutral-800;
+  border-radius: rem(5);
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  display: grid;
+  gap: $sz-300;
+  padding: $sz-300;
+  margin-inline: auto;
+
+  button,
+  input,
+  textarea {
+    border-radius: rem(2);
+    padding: rem(6) 2ch;
+  }
+
+  input,
+  textarea {
+    background-color: $neutral-800;
+    border: rem(2) solid $neutral-200;
+    width: 100%;
+  }
+
+  button {
+    background-color: $neutral-700 !important;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1);
+    color: $white;
+    margin-inline: auto;
+    width: max-content;
+
+    &:hover {
+      background-color: $neutral-900 !important;
+    }
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  label.required::after {
+    color: $red;
+    content: "*";
+    margin-left: 0.25ch;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  #tier_list_ranks {
+    border: rem(2) solid $neutral-600;
+    display: grid;
+    gap: $sz-300;
+    padding: $sz-300;
+
+    > div {
+      display: grid;
+      gap: $sz-300;
+
+      > div {
+        background-color: $neutral-800;
+        border: rem(2) solid $neutral-600;
+        display: grid;
+        gap: $sz-300;
+        padding: $sz-300;
+      }
+    }
+  }
+
+  @include sm {
+    max-width: rem(640);
+  }
+
+  @include lg {
+    gap: $sz-400;
+    max-width: rem(768);
+    padding: $sz-400;
+
+    #tier_list_ranks {
+      gap: $sz-400;
+      padding: $sz-400;
+
+      > div {
+        gap: $sz-400;
+
+        > div {
+          padding: $sz-400;
+        }
+      }
+    }
+  }
+
+  @include xl {
+    max-width: rem(1024);
+  }
+}

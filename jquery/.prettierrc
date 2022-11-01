@@ -1,0 +1,4 @@
+{
+  "plugins": ["./node_modules/prettier-plugin-twig-melody"],
+  "twigPrintWidth": 130
+}

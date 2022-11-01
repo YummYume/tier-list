@@ -1,0 +1,8 @@
+body {
+  background-color: $neutral-900;
+  padding: $sz-300;
+
+  @include lg {
+    padding: $sz-400;
+  }
+}

@@ -1,0 +1,17 @@
+body {
+  color: $neutral-100;
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 2.5;
+  text-align: center;
+}
+
+a {
+  &:hover {
+    text-decoration: underline;
+  }
+}
