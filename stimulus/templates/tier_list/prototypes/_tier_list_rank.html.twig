@@ -1,17 +1,24 @@
 {% macro displayTierListRank(tierListRankForm) %}
     {% import 'tier_list/prototypes/_tier_list_item.html.twig' as tierListItemMacro %}
 
-    <div>
+    <div data-collection-target="entry">
         {{ form_row(tierListRankForm.name) }}
         {{ form_row(tierListRankForm.description) }}
+        {{ form_row(tierListRankForm.position) }}
         {{ form_label(tierListRankForm.tierListItems) }}
         <div
             id="tier_list_items"
-            data-prototype="{{ tierListItemMacro.displayTierListItem(tierListRankForm.tierListItems.vars.prototype)|e }}"
+            data-controller="collection"
+            data-collection-prototype-value="{{ tierListItemMacro.displayTierListItem(tierListRankForm.tierListItems.vars.prototype)|e }}"
+            data-collection-prototype-name-value="__item__"
         >
-            {% for tierListItem in tierListRankForm.tierListItems %}
-                {{ tierListItemMacro.displayTierListItem(tierListItem) }}
-            {% endfor %}
+            <div data-collection-target="entries">
+                {% for tierListItem in tierListRankForm.tierListItems|sort((a, b) => a.position >= b.position) %}
+                    {{ tierListItemMacro.displayTierListItem(tierListItem) }}
+                {% endfor %}
+            </div>
+            <button type="button" data-action="click->collection#add">Add</button>
         </div>
+        <button type="button" data-action="click->collection#remove">Remove</button>
     </div>
 {% endmacro %}
