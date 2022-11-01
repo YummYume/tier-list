@@ -26,6 +26,7 @@
         "lint": "eslint ./assets"
     },
     "dependencies": {
+        "dotenv": "^16.0.3",
         "jquery": "^3.6.1"
     }
 }

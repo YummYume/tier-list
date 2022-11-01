@@ -1,6 +1,8 @@
 /* eslint-env node */
 
 const Encore = require("@symfony/webpack-encore");
+const dotenv = require("dotenv");
+let watch = null;
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -32,13 +34,26 @@ Encore.setOutputPath("public/build/")
   })
   .enableSassLoader()
   .enableReactPreset()
-  .enablePostCssLoader();
+  .enablePostCssLoader()
+  .configureDefinePlugin(options => {
+    const env = dotenv.config();
 
-module.exports = {
-  ...Encore.getWebpackConfig(),
-  watch: true,
-  watchOptions: {
-    aggregateTimeout: 200,
-    poll: 1000
-  }
-};
+    if (env.error) {
+      throw env.error;
+    }
+
+    watch = env.parsed.WATCH;
+  });
+
+module.exports = Encore.getWebpackConfig();
+
+if (watch === "true") {
+  module.exports = {
+    ...module.exports,
+    watch: true,
+    watchOptions: {
+      aggregateTimeout: 200,
+      poll: 1000
+    }
+  };
+}

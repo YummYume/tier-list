@@ -24,5 +24,8 @@
         "watch": "encore dev --watch",
         "build": "NODE_ENV=production encore production --progress",
         "lint": "eslint ./assets"
+    },
+    "dependencies": {
+        "dotenv": "^16.0.3"
     }
 }
