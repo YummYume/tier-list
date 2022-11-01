@@ -4,6 +4,8 @@ import { SECRET_API_HOST } from '$env/static/private';
 export async function load({ fetch }) {
     const tierLists = await fetch(`${SECRET_API_HOST}/api/spa/tier_lists`);
 
+    console.log(tierLists);
+
     return {
         tierLists: tierLists.json()
     };

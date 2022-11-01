@@ -1,7 +1,7 @@
 <?php
 
 $finder = (new PhpCsFixer\Finder())
-    ->in(__DIR__.'/vanilla/src')
+    ->in([__DIR__.'/vanilla/src', __DIR__.'/api/spa/src', __DIR__.'/jquery/src', __DIR__.'/stimulus/src'])
     ->exclude('var')
 ;
 
