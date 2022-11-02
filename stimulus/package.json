@@ -1,21 +1,20 @@
 {
     "devDependencies": {
-        "@babel/core": "^7.17.0",
-        "@babel/preset-env": "^7.16.0",
-        "@hotwired/stimulus": "^3.0.0",
-        "@swup/debug-plugin": "^1.0",
-        "@swup/fade-theme": "^1.0",
-        "@swup/forms-plugin": "^1.0",
-        "@swup/slide-theme": "^1.0",
-        "@symfony/stimulus-bridge": "^3.2.0",
-        "@symfony/ux-react": "file:vendor/symfony/ux-react/Resources/assets",
-        "@symfony/ux-swup": "file:vendor/symfony/ux-swup/Resources/assets",
-        "@symfony/ux-typed": "file:vendor/symfony/ux-typed/Resources/assets",
-        "@symfony/webpack-encore": "^4.0.0",
-        "autoprefixer": "^10.4.13",
-        "core-js": "^3.23.0",
         "eslint": "^8.26.0",
-        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-react": "^7.31.10"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "NODE_ENV=production encore production --progress",
+        "lint": "eslint ./assets"
+    },
+    "dependencies": {
+        "@babel/preset-react": "^7.18.6",
+        "dotenv": "^16.0.3",
+        "react-confetti": "^6.1.0",
         "postcss": "^8.4.18",
         "postcss-loader": "^7.0.1",
         "prettier-plugin-twig-melody": "^0.4.6",
@@ -29,19 +28,20 @@
         "typed.js": "^2.0",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
-        "webpack-notifier": "^1.15.0"
-    },
-    "license": "UNLICENSED",
-    "private": true,
-    "scripts": {
-        "dev": "encore dev",
-        "watch": "encore dev --watch",
-        "build": "NODE_ENV=production encore production --progress",
-        "lint": "eslint ./assets"
-    },
-    "dependencies": {
-        "@babel/preset-react": "^7.18.6",
-        "dotenv": "^16.0.3",
-        "react-confetti": "^6.1.0"
+        "webpack-notifier": "^1.15.0",
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@hotwired/stimulus": "^3.0.0",
+        "@swup/debug-plugin": "^1.0",
+        "@swup/fade-theme": "^1.0",
+        "@swup/forms-plugin": "^1.0",
+        "@swup/slide-theme": "^1.0",
+        "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/ux-react": "file:vendor/symfony/ux-react/Resources/assets",
+        "@symfony/ux-swup": "file:vendor/symfony/ux-swup/Resources/assets",
+        "@symfony/ux-typed": "file:vendor/symfony/ux-typed/Resources/assets",
+        "@symfony/webpack-encore": "^4.0.0",
+        "autoprefixer": "^10.4.13",
+        "core-js": "^3.23.0"
     }
 }
