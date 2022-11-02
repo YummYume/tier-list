@@ -2,10 +2,6 @@
   export let data;
 
   const tierList = JSON.parse(data.tierList);
-
-  const item = {
-    name: "oui",
-  };
 </script>
 
 <svelte:head>
