@@ -213,3 +213,34 @@ endif
 	mkdir spa/node_modules
 	docker cp nmj-spa:/usr/src/spa/node_modules ./spa/
 	@echo Dependencies for spa synced!
+
+#PRODUCTION
+update-prod:
+	cd vanilla && \
+	composer require symfony/requirements-checker && \
+	composer install --no-dev --optimize-autoloader && \
+	php bin/console assets:install && \
+	yarn install --production --no-progress && \
+	yarn build && \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
+	cd ../jquery && \
+	composer require symfony/requirements-checker && \
+	composer install --no-dev --optimize-autoloader && \
+	php bin/console assets:install && \
+	yarn install --production --no-progress && \
+	yarn build && \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
+	cd ../stimulus && \
+	composer require symfony/requirements-checker && \
+	composer install --no-dev --optimize-autoloader && \
+	php bin/console assets:install && \
+	yarn install --production --no-progress && \
+	yarn build && \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
+	cd ../api/spa && \
+	composer require symfony/requirements-checker && \
+	composer install --no-dev --optimize-autoloader && \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
+	cd ../../spa && \
+	yarn install --production --no-progress && \
+	yarn build
