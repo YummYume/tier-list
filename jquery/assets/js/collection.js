@@ -5,9 +5,8 @@ $(document.body).on('click', '[data-type-button="add"]', (e) => {
     if (prototype.length > 0) {
         const template = $(prototype).data('prototype');
         const collection = $(prototype).find('div[data-collection]');
-        const newEntry = $('<div></div>').html(
-            template.replace(/__name__/g, collection.length > 0 ? collection.children().length : prototype.children().length)
-        );
+        const templateName = new RegExp(prototype.data('prototypeName') ?? '__name__', 'g');
+        const newEntry = template.replace(templateName, collection.length > 0 ? collection.children().length : prototype.children().length);
 
         if (collection.length > 0) {
             collection.first().append(newEntry);

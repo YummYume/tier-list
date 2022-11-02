@@ -35,6 +35,7 @@ class TierListRankType extends AbstractType
                 'allow_delete' => true,
                 'prototype' => true,
                 'by_reference' => false,
+                'prototype_name' => '__item__',
             ])
         ;
     }

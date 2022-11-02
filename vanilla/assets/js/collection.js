@@ -7,13 +7,13 @@ document.body.addEventListener('click', (e) => {
         if (prototype) {
             const template = prototype.dataset.prototype;
             const collection = prototype.querySelector('[data-collection]');
-            const newEntry = document.createElement('div');
-            newEntry.innerHTML = template.replace(/__name__/g, collection ? collection.childElementCount : prototype.childElementCount);
+            const templateName = new RegExp(prototype.dataset.prototypeName ?? '__name__', 'g');
+            const newEntry = template.replace(templateName, collection ? collection.childElementCount : prototype.childElementCount);
 
             if (collection) {
-                collection.appendChild(newEntry);
+                collection.insertAdjacentHTML('beforeend', newEntry);
             } else {
-                prototype.appendChild(newEntry);
+                prototype.insertAdjacentHTML('beforeend', newEntry);
             }
         }
     } else if (clickedNode.dataset.typeButton === 'remove') {
