@@ -12,7 +12,7 @@
             data-prototype-name="__item__"
         >
             <div data-collection>
-                {% for tierListItem in tierListRankForm.tierListItems|sort((a, b) => a.position >= b.position) %}
+                {% for tierListItem in tierListRankForm.tierListItems %}
                     {{ tierListItemMacro.displayTierListItem(tierListItem) }}
                 {% endfor %}
             </div>

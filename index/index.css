@@ -9,6 +9,7 @@ body {
     flex-direction: column;
     align-items: center;
     color: #fff;
+    padding: 0 10px;
 }
 
 .title, .sub-title {
@@ -21,6 +22,7 @@ body {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    gap: 25px;
 }
 
 .links__item {

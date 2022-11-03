@@ -11,7 +11,6 @@
 
 <div class="tier-list">
   <h1>{tierList.name}</h1>
-
   {#if tierList.description}
     <p>{tierList.description}</p>
   {/if}

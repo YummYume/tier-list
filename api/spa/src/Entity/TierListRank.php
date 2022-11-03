@@ -31,6 +31,7 @@ class TierListRank
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'tierListRank', targetEntity: TierListItem::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OrderBy(['position' => 'ASC'])]
     #[Groups(['tier_list'])]
     private Collection $tierListItems;
 

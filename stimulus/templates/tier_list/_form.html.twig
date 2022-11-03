@@ -10,7 +10,7 @@
         data-collection-prototype-value="{{ tierListRankMacro.displayTierListRank(form.tierListRanks.vars.prototype)|e }}"
     >
         <div data-collection-target="entries">
-            {% for tierListRank in form.tierListRanks|sort((a, b) => a.position >= b.position) %}
+            {% for tierListRank in form.tierListRanks %}
                 {{ tierListRankMacro.displayTierListRank(tierListRank) }}
             {% endfor %}
         </div>

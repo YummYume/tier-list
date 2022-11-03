@@ -169,4 +169,5 @@ button:focus:not(:focus-visible) {
   display: flex;
   justify-content: center;
   padding: 2rem 2ch;
+  text-align: center;
 }

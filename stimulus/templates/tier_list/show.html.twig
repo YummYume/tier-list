@@ -22,18 +22,14 @@
             <tr>
                 <th>Ranks</th>
                 <td>
-                    {% for tierListRank in tier_list.tierListRanks|sort((a, b) => a.position >= b.position) %}
+                    {% for tierListRank in tier_list.tierListRanks %}
                         <li>
                             <span>{{ tierListRank.name }}</span>
                             <div>
                                 My items are
                                 {% if tierListRank.tierListItems|length > 1 %}
-                                    {% set sortedStrings = [] %}
-                                    {% for item in tierListRank.tierListItems|sort((a, b) => a.position >= b.position) %}
-                                        {% set sortedStrings = sortedStrings|merge([item.name]) %}
-                                    {% endfor %}
                                     <span {{ stimulus_controller('symfony/ux-typed', {
-                                        strings: sortedStrings,
+                                        strings: tierListRank.tierListItems|map(item => item.name),
                                         smartBackspace: true,
                                         typeSpeed: 75,
                                         startDelay: 100,
